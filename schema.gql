@@ -25,11 +25,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type DeleteManyResponse {
-  """The number of records deleted."""
-  deletedCount: Int!
-}
-
 type EmpenhoDeleteResponse {
   id: ID
   unidadeGestora: Float
@@ -46,11 +41,6 @@ type EmpenhoDeleteResponse {
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
-}
-
-type UpdateManyResponse {
-  """The number of records updated."""
-  updatedCount: Int!
 }
 
 type EmpenhoEdge {
@@ -191,11 +181,8 @@ enum SortNulls {
 
 type Mutation {
   createOneEmpenho(input: CreateOneEmpenhoInput!): Empenho!
-  createManyEmpenhos(input: CreateManyEmpenhosInput!): [Empenho!]!
   updateOneEmpenho(input: UpdateOneEmpenhoInput!): Empenho!
-  updateManyEmpenhos(input: UpdateManyEmpenhosInput!): UpdateManyResponse!
   deleteOneEmpenho(input: DeleteOneEmpenhoInput!): EmpenhoDeleteResponse!
-  deleteManyEmpenhos(input: DeleteManyEmpenhosInput!): DeleteManyResponse!
 }
 
 input CreateOneEmpenhoInput {
@@ -205,11 +192,6 @@ input CreateOneEmpenhoInput {
 
 input CreateEmpenhoInput {
   unidadeGestora: Float!
-}
-
-input CreateManyEmpenhosInput {
-  """Array of records to create"""
-  empenhos: [CreateEmpenhoInput!]!
 }
 
 input UpdateOneEmpenhoInput {
@@ -224,32 +206,7 @@ input UpdateEmpenhoInput {
   unidadeGestora: Float!
 }
 
-input UpdateManyEmpenhosInput {
-  """Filter used to find fields to update"""
-  filter: EmpenhoUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: UpdateEmpenhoInput!
-}
-
-input EmpenhoUpdateFilter {
-  and: [EmpenhoUpdateFilter!]
-  or: [EmpenhoUpdateFilter!]
-  unidadeGestora: NumberFieldComparison
-}
-
 input DeleteOneEmpenhoInput {
   """The id of the record to delete."""
   id: ID!
-}
-
-input DeleteManyEmpenhosInput {
-  """Filter to find records to delete"""
-  filter: EmpenhoDeleteFilter!
-}
-
-input EmpenhoDeleteFilter {
-  and: [EmpenhoDeleteFilter!]
-  or: [EmpenhoDeleteFilter!]
-  unidadeGestora: NumberFieldComparison
 }
