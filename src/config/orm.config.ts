@@ -8,6 +8,7 @@ dotenv.config();
 const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: env.POSTGRES_HOST,
+  logging: 'all',
   port: Number(env.POSTGRES_PORT),
   username: env.POSTGRES_USER,
   password: env.POSTGRES_PASSWORD,

@@ -5,11 +5,11 @@
 type Empenho {
   id: ID!
   unidadeGestora: Float!
-  dataEmissao: DateTime!
+  data_emissao: DateTime!
   funcionalProgramatica: String!
   numero: String!
   numeroOriginal: String!
-  valorEmpenho: String!
+  valorEmpenho: Float!
   tipo: String!
   modalidade: String!
   numeroContrato: String!
@@ -28,11 +28,11 @@ scalar DateTime
 type EmpenhoDeleteResponse {
   id: ID
   unidadeGestora: Float
-  dataEmissao: DateTime
+  data_emissao: DateTime
   funcionalProgramatica: String
   numero: String
   numeroOriginal: String
-  valorEmpenho: String
+  valorEmpenho: Float
   tipo: String
   modalidade: String
   numeroContrato: String
@@ -77,26 +77,32 @@ type EmpenhoConnection {
 }
 
 type EmpenhoAggregateGroupBy {
+  id: ID
   unidadeGestora: Float
 }
 
 type EmpenhoCountAggregate {
+  id: Int
   unidadeGestora: Int
 }
 
 type EmpenhoSumAggregate {
+  id: Float
   unidadeGestora: Float
 }
 
 type EmpenhoAvgAggregate {
+  id: Float
   unidadeGestora: Float
 }
 
 type EmpenhoMinAggregate {
+  id: ID
   unidadeGestora: Float
 }
 
 type EmpenhoMaxAggregate {
+  id: ID
   unidadeGestora: Float
 }
 
@@ -134,7 +140,25 @@ input CursorPaging {
 input EmpenhoFilter {
   and: [EmpenhoFilter!]
   or: [EmpenhoFilter!]
+  id: IDFilterComparison
   unidadeGestora: NumberFieldComparison
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
 }
 
 input NumberFieldComparison {
@@ -164,6 +188,7 @@ input EmpenhoSort {
 }
 
 enum EmpenhoSortFields {
+  id
   unidadeGestora
 }
 
@@ -180,9 +205,9 @@ enum SortNulls {
 }
 
 type Mutation {
-  createOneEmpenho(input: CreateOneEmpenhoInput!): Empenho!
-  updateOneEmpenho(input: UpdateOneEmpenhoInput!): Empenho!
-  deleteOneEmpenho(input: DeleteOneEmpenhoInput!): EmpenhoDeleteResponse!
+  createEmpenho(input: CreateOneEmpenhoInput!): Empenho!
+  updateEmpenho(input: UpdateOneEmpenhoInput!): Empenho!
+  deleteEmpenho(input: DeleteOneEmpenhoInput!): EmpenhoDeleteResponse!
 }
 
 input CreateOneEmpenhoInput {
@@ -192,6 +217,16 @@ input CreateOneEmpenhoInput {
 
 input CreateEmpenhoInput {
   unidadeGestora: Float!
+  dataEmissao: String!
+  funcionalProgramatica: String!
+  numero: String!
+  numeroOriginal: String
+  valorEmpenho: Float!
+  tipo: String!
+  modalidade: String!
+  exercicio: Float!
+  numeroContrato: String
+  numeroProcesso: String
 }
 
 input UpdateOneEmpenhoInput {
@@ -203,7 +238,17 @@ input UpdateOneEmpenhoInput {
 }
 
 input UpdateEmpenhoInput {
-  unidadeGestora: Float!
+  unidadeGestora: Float
+  dataEmissao: String
+  funcionalProgramatica: String
+  numero: String
+  numeroOriginal: String
+  valorEmpenho: Float
+  tipo: String
+  modalidade: String
+  exercicio: Float
+  numeroContrato: String
+  numeroProcesso: String
 }
 
 input DeleteOneEmpenhoInput {

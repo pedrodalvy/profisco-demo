@@ -1,4 +1,4 @@
-import { FilterableField } from '@nestjs-query/query-graphql';
+import { FilterableField, IDField } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import {
   Column,
@@ -12,7 +12,7 @@ import {
 @ObjectType()
 @Entity('empenhos')
 export class Empenho {
-  @Field(() => ID)
+  @IDField(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,7 +21,7 @@ export class Empenho {
   unidadeGestora: number;
 
   @Field()
-  @DeleteDateColumn({ name: 'data_emissao' })
+  @Field({ name: 'data_emissao' })
   dataEmissao: Date;
 
   @Field()
@@ -29,7 +29,7 @@ export class Empenho {
   funcionalProgramatica: string;
 
   @Field()
-  @Column({ length: 50 })
+  @Column({ length: 50, unique: true })
   numero: string;
 
   @Field()
@@ -38,7 +38,7 @@ export class Empenho {
 
   @Field()
   @Column({ name: 'valor_empenho', precision: 2 })
-  valorEmpenho: string;
+  valorEmpenho: number;
 
   @Field()
   @Column({ length: 100 })
