@@ -5,9 +5,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { OrdemBancaria } from '../../ordens-bancarias/entities/ordem-bancaria.entity';
 
 @ObjectType()
 @Entity('empenhos')
@@ -71,4 +74,9 @@ export class Empenho {
   @Field(() => GraphQLISODateTime, { nullable: true })
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt?: Date;
+
+  @Field(() => [OrdemBancaria], { nullable: true })
+  @OneToMany(() => OrdemBancaria, (ordemBancaria) => ordemBancaria.empenho)
+  @JoinColumn({ name: 'id', referencedColumnName: 'empenho_id' })
+  ordensBancarias: OrdemBancaria[];
 }

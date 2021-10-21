@@ -3,14 +3,22 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { FilterableField, IDField } from '@nestjs-query/query-graphql';
+import {
+  FilterableField,
+  IDField,
+  Relation,
+} from '@nestjs-query/query-graphql';
+import { Empenho } from '../../empenhos/entities/empenho.entity';
 
 @ObjectType()
 @Entity('ordens_bancarias')
+@Relation('empenho', () => Empenho)
 export class OrdemBancaria {
   @IDField(() => ID)
   @PrimaryGeneratedColumn()
@@ -107,4 +115,9 @@ export class OrdemBancaria {
   @Field(() => GraphQLISODateTime, { nullable: true })
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt?: Date;
+
+  @Field(() => Empenho, { nullable: true })
+  @ManyToOne(() => Empenho, (empenho) => empenho.ordensBancarias)
+  @JoinColumn({ name: 'empenho_id', referencedColumnName: 'id' })
+  empenho: Empenho;
 }
