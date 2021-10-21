@@ -5,7 +5,7 @@
 type Empenho {
   id: ID!
   unidadeGestora: Float!
-  data_emissao: DateTime!
+  dataEmissao: DateTime!
   funcionalProgramatica: String!
   numero: String!
   numeroOriginal: String!
@@ -28,7 +28,7 @@ scalar DateTime
 type EmpenhoDeleteResponse {
   id: ID
   unidadeGestora: Float
-  data_emissao: DateTime
+  dataEmissao: DateTime
   funcionalProgramatica: String
   numero: String
   numeroOriginal: String
@@ -106,6 +106,165 @@ type EmpenhoMaxAggregate {
   unidadeGestora: Float
 }
 
+type OrdemBancaria {
+  id: ID!
+  numeroDocumento: String!
+  numeroDocumentoOriginal: String!
+  credorIdentificacao: String!
+  finalidadePagamento: String!
+  justificativaEstorno: String!
+  numeroContrato: String!
+  numeroConvenio: String!
+  aditivoConvenio: String!
+  idusoFonteRecurso: String!
+  situacaoOb: String!
+  notaFiscal: String!
+  beneficiarios: String!
+  codigoUg: Float!
+  ugFavorecida: Float!
+  versaoContrato: Float!
+  identificador_uso_codigo: Float!
+  valorDocumento: Float!
+  dataEmissaoDocumento: DateTime!
+  dataContabilizacaoDocumento: DateTime!
+  empenhoId: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrdemBancariaEdge {
+  """The node containing the OrdemBancaria"""
+  node: OrdemBancaria!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type OrdemBancariaConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [OrdemBancariaEdge!]!
+}
+
+type OrdemBancariaAggregateGroupBy {
+  id: ID
+  numeroDocumento: String
+  numeroDocumentoOriginal: String
+  credorIdentificacao: String
+  finalidadePagamento: String
+  justificativaEstorno: String
+  numeroContrato: String
+  numeroConvenio: String
+  aditivoConvenio: String
+  idusoFonteRecurso: String
+  situacaoOb: String
+  notaFiscal: String
+  beneficiarios: String
+  codigoUg: Float
+  ugFavorecida: Float
+  versaoContrato: Float
+  identificador_uso_codigo: Float
+  valorDocumento: Float
+  dataEmissaoDocumento: DateTime
+  dataContabilizacaoDocumento: DateTime
+  empenhoId: Float
+}
+
+type OrdemBancariaCountAggregate {
+  id: Int
+  numeroDocumento: Int
+  numeroDocumentoOriginal: Int
+  credorIdentificacao: Int
+  finalidadePagamento: Int
+  justificativaEstorno: Int
+  numeroContrato: Int
+  numeroConvenio: Int
+  aditivoConvenio: Int
+  idusoFonteRecurso: Int
+  situacaoOb: Int
+  notaFiscal: Int
+  beneficiarios: Int
+  codigoUg: Int
+  ugFavorecida: Int
+  versaoContrato: Int
+  identificador_uso_codigo: Int
+  valorDocumento: Int
+  dataEmissaoDocumento: Int
+  dataContabilizacaoDocumento: Int
+  empenhoId: Int
+}
+
+type OrdemBancariaSumAggregate {
+  id: Float
+  codigoUg: Float
+  ugFavorecida: Float
+  versaoContrato: Float
+  identificador_uso_codigo: Float
+  valorDocumento: Float
+  empenhoId: Float
+}
+
+type OrdemBancariaAvgAggregate {
+  id: Float
+  codigoUg: Float
+  ugFavorecida: Float
+  versaoContrato: Float
+  identificador_uso_codigo: Float
+  valorDocumento: Float
+  empenhoId: Float
+}
+
+type OrdemBancariaMinAggregate {
+  id: ID
+  numeroDocumento: String
+  numeroDocumentoOriginal: String
+  credorIdentificacao: String
+  finalidadePagamento: String
+  justificativaEstorno: String
+  numeroContrato: String
+  numeroConvenio: String
+  aditivoConvenio: String
+  idusoFonteRecurso: String
+  situacaoOb: String
+  notaFiscal: String
+  beneficiarios: String
+  codigoUg: Float
+  ugFavorecida: Float
+  versaoContrato: Float
+  identificador_uso_codigo: Float
+  valorDocumento: Float
+  dataEmissaoDocumento: DateTime
+  dataContabilizacaoDocumento: DateTime
+  empenhoId: Float
+}
+
+type OrdemBancariaMaxAggregate {
+  id: ID
+  numeroDocumento: String
+  numeroDocumentoOriginal: String
+  credorIdentificacao: String
+  finalidadePagamento: String
+  justificativaEstorno: String
+  numeroContrato: String
+  numeroConvenio: String
+  aditivoConvenio: String
+  idusoFonteRecurso: String
+  situacaoOb: String
+  notaFiscal: String
+  beneficiarios: String
+  codigoUg: Float
+  ugFavorecida: Float
+  versaoContrato: Float
+  identificador_uso_codigo: Float
+  valorDocumento: Float
+  dataEmissaoDocumento: DateTime
+  dataContabilizacaoDocumento: DateTime
+  empenhoId: Float
+}
+
 type Query {
   empenho(
     """The id of the record to find."""
@@ -121,6 +280,20 @@ type Query {
     """Specify to sort results."""
     sorting: [EmpenhoSort!] = []
   ): EmpenhoConnection!
+  ordemBancaria(
+    """The id of the record to find."""
+    id: ID!
+  ): OrdemBancaria
+  ordensBancarias(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: OrdemBancariaFilter = {}
+
+    """Specify to sort results."""
+    sorting: [OrdemBancariaSort!] = []
+  ): OrdemBancariaConnection!
 }
 
 input CursorPaging {
@@ -202,6 +375,99 @@ enum SortDirection {
 enum SortNulls {
   NULLS_FIRST
   NULLS_LAST
+}
+
+input OrdemBancariaFilter {
+  and: [OrdemBancariaFilter!]
+  or: [OrdemBancariaFilter!]
+  id: IDFilterComparison
+  numeroDocumento: StringFieldComparison
+  numeroDocumentoOriginal: StringFieldComparison
+  credorIdentificacao: StringFieldComparison
+  finalidadePagamento: StringFieldComparison
+  justificativaEstorno: StringFieldComparison
+  numeroContrato: StringFieldComparison
+  numeroConvenio: StringFieldComparison
+  aditivoConvenio: StringFieldComparison
+  idusoFonteRecurso: StringFieldComparison
+  situacaoOb: StringFieldComparison
+  notaFiscal: StringFieldComparison
+  beneficiarios: StringFieldComparison
+  codigoUg: NumberFieldComparison
+  ugFavorecida: NumberFieldComparison
+  versaoContrato: NumberFieldComparison
+  identificador_uso_codigo: NumberFieldComparison
+  valorDocumento: NumberFieldComparison
+  dataEmissaoDocumento: DateFieldComparison
+  dataContabilizacaoDocumento: DateFieldComparison
+  empenhoId: NumberFieldComparison
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+input OrdemBancariaSort {
+  field: OrdemBancariaSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum OrdemBancariaSortFields {
+  id
+  numeroDocumento
+  numeroDocumentoOriginal
+  credorIdentificacao
+  finalidadePagamento
+  justificativaEstorno
+  numeroContrato
+  numeroConvenio
+  aditivoConvenio
+  idusoFonteRecurso
+  situacaoOb
+  notaFiscal
+  beneficiarios
+  codigoUg
+  ugFavorecida
+  versaoContrato
+  identificador_uso_codigo
+  valorDocumento
+  dataEmissaoDocumento
+  dataContabilizacaoDocumento
+  empenhoId
 }
 
 type Mutation {

@@ -21,7 +21,7 @@ export class Empenho {
   unidadeGestora: number;
 
   @Field()
-  @Field({ name: 'data_emissao' })
+  @Column({ name: 'data_emissao' })
   dataEmissao: Date;
 
   @Field()
