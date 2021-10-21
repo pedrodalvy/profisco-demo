@@ -268,6 +268,43 @@ type OrdemBancariaMaxAggregate {
   empenhoId: Float
 }
 
+type ListaNaturezaDespesa {
+  NaturezaDespesa: String
+  ValorItem: Float
+}
+
+type DadosCredor {
+  CredorIdentificacao: String
+  RazaoSocial: String
+  Email: String
+  Telefone: String
+  CEP: String
+  UF: String
+  Municipio: String
+  Bairro: String
+  Logradouro: String
+  Numero: String
+  Complemento: String
+}
+
+type EmpenhoSpfDto {
+  CodigoUG: Float
+  NumeroEmpenho: String
+  NumeroEmpenhoOriginal: String
+  DataEmissaoEmpenho: String
+  DataContabilizacao: String
+  ValorEmpenho: Float
+  TipoEmpenho: String
+  ModalidadeEmpenho: String
+  FuncionalProgramatica: String
+  FonteRecurso: String
+  NumeroContrato: Float
+  VersaoContrato: String
+  CodigoEvento: String
+  ListaNaturezaDespesa: [ListaNaturezaDespesa!]
+  DadosCredor: DadosCredor
+}
+
 type Query {
   empenho(
     """The id of the record to find."""
@@ -297,6 +334,7 @@ type Query {
     """Specify to sort results."""
     sorting: [OrdemBancariaSort!] = []
   ): OrdemBancariaConnection!
+  buscarEmpenhosSpf(inputData: BuscarEmpenhosSpfInput!): [EmpenhoSpfDto!]!
 }
 
 input CursorPaging {
@@ -471,6 +509,16 @@ enum OrdemBancariaSortFields {
   dataEmissaoDocumento
   dataContabilizacaoDocumento
   empenhoId
+}
+
+input BuscarEmpenhosSpfInput {
+  unidadeGestoraCodigo: Float!
+  exercicio: Float!
+  numeroEmpenho: String
+  numeroEmpenhoOriginal: String
+  fonteRecurso: String
+  dataInicial: String
+  dataFinal: String
 }
 
 type Mutation {

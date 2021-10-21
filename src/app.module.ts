@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrdensBancariasModule } from './ordens-bancarias/ordens-bancarias.module';
+import { SpfModule } from './spf/spf.module';
 import * as ormConfig from './config/orm.config';
 
 @Module({
@@ -15,6 +16,7 @@ import * as ormConfig from './config/orm.config';
     }),
     EmpenhosModule,
     OrdensBancariasModule,
+    SpfModule,
   ],
   controllers: [],
   providers: [],
