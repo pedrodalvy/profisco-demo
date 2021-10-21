@@ -1,0 +1,74 @@
+import { FilterableField } from '@nestjs-query/query-graphql';
+import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+@ObjectType()
+@Entity('empenhos')
+export class Empenho {
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @FilterableField()
+  @Column({ name: 'unidade_gestora' })
+  unidadeGestora: number;
+
+  @Field()
+  @DeleteDateColumn({ name: 'data_emissao' })
+  dataEmissao: Date;
+
+  @Field()
+  @Column({ name: 'funcional_programatica', length: 255 })
+  funcionalProgramatica: string;
+
+  @Field()
+  @Column({ length: 50 })
+  numero: string;
+
+  @Field()
+  @Column({ name: 'numero_original', length: 50 })
+  numeroOriginal: string;
+
+  @Field()
+  @Column({ name: 'valor_empenho', precision: 2 })
+  valorEmpenho: string;
+
+  @Field()
+  @Column({ length: 100 })
+  tipo: string;
+
+  @Field()
+  @Column({ length: 150 })
+  modalidade: string;
+
+  @Field()
+  @Column({ name: 'numero_contrato', length: 100 })
+  numeroContrato: string;
+
+  @Field()
+  @Column()
+  exercicio: number;
+
+  @Field()
+  @Column({ name: 'numero_processo', length: 50 })
+  numeroProcesso: string;
+
+  @Field(() => GraphQLISODateTime)
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt?: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt?: Date;
+}

@@ -1,0 +1,255 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Empenho {
+  id: ID!
+  unidadeGestora: Float!
+  dataEmissao: DateTime!
+  funcionalProgramatica: String!
+  numero: String!
+  numeroOriginal: String!
+  valorEmpenho: String!
+  tipo: String!
+  modalidade: String!
+  numeroContrato: String!
+  exercicio: Float!
+  numeroProcesso: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+type EmpenhoDeleteResponse {
+  id: ID
+  unidadeGestora: Float
+  dataEmissao: DateTime
+  funcionalProgramatica: String
+  numero: String
+  numeroOriginal: String
+  valorEmpenho: String
+  tipo: String
+  modalidade: String
+  numeroContrato: String
+  exercicio: Float
+  numeroProcesso: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+type EmpenhoEdge {
+  """The node containing the Empenho"""
+  node: Empenho!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type EmpenhoConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [EmpenhoEdge!]!
+}
+
+type EmpenhoAggregateGroupBy {
+  unidadeGestora: Float
+}
+
+type EmpenhoCountAggregate {
+  unidadeGestora: Int
+}
+
+type EmpenhoSumAggregate {
+  unidadeGestora: Float
+}
+
+type EmpenhoAvgAggregate {
+  unidadeGestora: Float
+}
+
+type EmpenhoMinAggregate {
+  unidadeGestora: Float
+}
+
+type EmpenhoMaxAggregate {
+  unidadeGestora: Float
+}
+
+type Query {
+  empenho(
+    """The id of the record to find."""
+    id: ID!
+  ): Empenho
+  empenhos(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: EmpenhoFilter = {}
+
+    """Specify to sort results."""
+    sorting: [EmpenhoSort!] = []
+  ): EmpenhoConnection!
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input EmpenhoFilter {
+  and: [EmpenhoFilter!]
+  or: [EmpenhoFilter!]
+  unidadeGestora: NumberFieldComparison
+}
+
+input NumberFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Float
+  neq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  in: [Float!]
+  notIn: [Float!]
+  between: NumberFieldComparisonBetween
+  notBetween: NumberFieldComparisonBetween
+}
+
+input NumberFieldComparisonBetween {
+  lower: Float!
+  upper: Float!
+}
+
+input EmpenhoSort {
+  field: EmpenhoSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum EmpenhoSortFields {
+  unidadeGestora
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type Mutation {
+  createOneEmpenho(input: CreateOneEmpenhoInput!): Empenho!
+  createManyEmpenhos(input: CreateManyEmpenhosInput!): [Empenho!]!
+  updateOneEmpenho(input: UpdateOneEmpenhoInput!): Empenho!
+  updateManyEmpenhos(input: UpdateManyEmpenhosInput!): UpdateManyResponse!
+  deleteOneEmpenho(input: DeleteOneEmpenhoInput!): EmpenhoDeleteResponse!
+  deleteManyEmpenhos(input: DeleteManyEmpenhosInput!): DeleteManyResponse!
+}
+
+input CreateOneEmpenhoInput {
+  """The record to create"""
+  empenho: CreateEmpenhoInput!
+}
+
+input CreateEmpenhoInput {
+  unidadeGestora: Float!
+}
+
+input CreateManyEmpenhosInput {
+  """Array of records to create"""
+  empenhos: [CreateEmpenhoInput!]!
+}
+
+input UpdateOneEmpenhoInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateEmpenhoInput!
+}
+
+input UpdateEmpenhoInput {
+  unidadeGestora: Float!
+}
+
+input UpdateManyEmpenhosInput {
+  """Filter used to find fields to update"""
+  filter: EmpenhoUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateEmpenhoInput!
+}
+
+input EmpenhoUpdateFilter {
+  and: [EmpenhoUpdateFilter!]
+  or: [EmpenhoUpdateFilter!]
+  unidadeGestora: NumberFieldComparison
+}
+
+input DeleteOneEmpenhoInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyEmpenhosInput {
+  """Filter to find records to delete"""
+  filter: EmpenhoDeleteFilter!
+}
+
+input EmpenhoDeleteFilter {
+  and: [EmpenhoDeleteFilter!]
+  or: [EmpenhoDeleteFilter!]
+  unidadeGestora: NumberFieldComparison
+}
