@@ -31,7 +31,8 @@ export class CreateEmpenhos1634819841512 implements MigrationInterface {
         name: 'numero',
         type: 'varchar',
         length: '50',
-        isNullable: true,
+        isNullable: false,
+        isUnique: true,
       },
       {
         name: 'numero_original',
@@ -42,7 +43,8 @@ export class CreateEmpenhos1634819841512 implements MigrationInterface {
       {
         name: 'valor_empenho',
         type: 'decimal',
-        precision: 2,
+        precision: 10,
+        scale: 2,
         isNullable: true,
       },
       {
