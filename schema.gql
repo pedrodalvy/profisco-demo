@@ -305,6 +305,47 @@ type EmpenhoSpfDto {
   DadosCredor: DadosCredor
 }
 
+type ListaCredoresOrdemBancaria {
+  CredorOBLista: String
+  Valor: Float
+  SituacaoPagamentoCredor: String
+  NomeCompletoBeneficiario: String
+  NumeroPedido: String
+  TipoPedidoRelatorio: String
+}
+
+type ItensOrdemBancaria {
+  NumeroLiquidacao: String
+  NumeroRetencao: String
+  NumeroEmpenho: String
+  NumeroEmpenhoOriginal: String
+  FuncionalProgramatica: String
+  NaturezaDespesa: String
+  ValorItem: Float
+  ListaCredoresOrdemBancaria: [ListaCredoresOrdemBancaria!]
+}
+
+type OrdemBancariaSpfDto {
+  CodigoUG: Float
+  NumeroDocumento: String
+  NumeroDocumentoOriginal: String
+  CredorIdentificacaoFavorecida: String
+  UGFavorecida: String
+  DataEmissaoDocumento: String
+  DataContabilizacaoDocumento: String
+  FinalidadePagamento: String
+  JustificativaEstorno: String
+  NumeroContrato: Float
+  VersaoContrato: Float
+  NumeroConvenio: Float
+  AditivoConvenio: Float
+  IdentificadorUsoCodigo: Float
+  IdusoFonteRecurso: String
+  ValorDocumento: Float
+  SituacaoOB: String
+  ItensOrdemBancaria: [ItensOrdemBancaria!]
+}
+
 type Query {
   empenho(
     """The id of the record to find."""
@@ -335,6 +376,7 @@ type Query {
     sorting: [OrdemBancariaSort!] = []
   ): OrdemBancariaConnection!
   buscarEmpenhosSpf(inputData: BuscarEmpenhosSpfInput!): [EmpenhoSpfDto!]!
+  buscarObsSpf(inputData: BuscarObSpfInput!): [OrdemBancariaSpfDto!]!
 }
 
 input CursorPaging {
@@ -516,6 +558,15 @@ input BuscarEmpenhosSpfInput {
   exercicio: Float!
   numeroEmpenho: String
   numeroEmpenhoOriginal: String
+  fonteRecurso: String
+  dataInicial: String
+  dataFinal: String
+}
+
+input BuscarObSpfInput {
+  unidadeGestoraCodigo: Float!
+  exercicio: Float!
+  numeroEmpenho: String!
   fonteRecurso: String
   dataInicial: String
   dataFinal: String
