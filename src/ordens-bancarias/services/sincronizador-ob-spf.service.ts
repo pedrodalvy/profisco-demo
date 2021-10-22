@@ -19,32 +19,42 @@ export class SincronizadorObSpfService {
     });
 
     ordensBancariasSpf.map(async (obSpf) => {
-      const numeroDocumento = obSpf.NumeroDocumento;
-
-      const ordemBancaria =
-        await this.repository.buscarOuCriarPorNumeroDocumento(numeroDocumento);
-
-      ordemBancaria.empenhoId = empenho.id;
-      ordemBancaria.numeroDocumentoOriginal = obSpf.NumeroDocumentoOriginal;
-      ordemBancaria.credorIdentificacao = obSpf.CredorIdentificacaoFavorecida;
-      ordemBancaria.finalidadePagamento = obSpf.FinalidadePagamento;
-      ordemBancaria.justificativaEstorno = obSpf.JustificativaEstorno;
-      ordemBancaria.numeroContrato = obSpf.NumeroContrato;
-      ordemBancaria.numeroConvenio = obSpf.NumeroConvenio;
-      ordemBancaria.aditivoConvenio = obSpf.AditivoConvenio;
-      ordemBancaria.idusoFonteRecurso = obSpf.IdusoFonteRecurso;
-      ordemBancaria.situacaoOb = obSpf.SituacaoOB;
-      ordemBancaria.codigoUg = obSpf.CodigoUG;
-      ordemBancaria.ugFavorecida = obSpf.UGFavorecida;
-      ordemBancaria.versaoContrato = obSpf.VersaoContrato;
-      ordemBancaria.identificadorUsoCodigo = obSpf.IdentificadorUsoCodigo;
-      ordemBancaria.dataEmissaoDocumento = obSpf.DataEmissaoDocumento;
-      ordemBancaria.valorDocumento = this.somarValorDocumento(obSpf);
-      ordemBancaria.dataContabilizacaoDocumento =
-        obSpf.DataContabilizacaoDocumento;
-
-      await this.repository.save(ordemBancaria);
+      if (obSpf.NumeroDocumento) {
+        await this.salvarOrdemBancaria(obSpf, empenho);
+      }
     });
+  }
+
+  async salvarOrdemBancaria(
+    obSpf: OrdemBancariaSpfDto,
+    empenho: Empenho,
+  ): Promise<void> {
+    const numeroDocumento = obSpf.NumeroDocumento;
+
+    const ordemBancaria = await this.repository.buscarOuCriarPorNumeroDocumento(
+      numeroDocumento,
+    );
+
+    ordemBancaria.empenhoId = empenho.id;
+    ordemBancaria.numeroDocumentoOriginal = obSpf.NumeroDocumentoOriginal;
+    ordemBancaria.credorIdentificacao = obSpf.CredorIdentificacaoFavorecida;
+    ordemBancaria.finalidadePagamento = obSpf.FinalidadePagamento;
+    ordemBancaria.justificativaEstorno = obSpf.JustificativaEstorno;
+    ordemBancaria.numeroContrato = obSpf.NumeroContrato;
+    ordemBancaria.numeroConvenio = obSpf.NumeroConvenio;
+    ordemBancaria.aditivoConvenio = obSpf.AditivoConvenio;
+    ordemBancaria.idusoFonteRecurso = obSpf.IdusoFonteRecurso;
+    ordemBancaria.situacaoOb = obSpf.SituacaoOB;
+    ordemBancaria.codigoUg = obSpf.CodigoUG;
+    ordemBancaria.ugFavorecida = obSpf.UGFavorecida;
+    ordemBancaria.versaoContrato = obSpf.VersaoContrato;
+    ordemBancaria.identificadorUsoCodigo = obSpf.IdentificadorUsoCodigo;
+    ordemBancaria.dataEmissaoDocumento = obSpf.DataEmissaoDocumento;
+    ordemBancaria.valorDocumento = this.somarValorDocumento(obSpf);
+    ordemBancaria.dataContabilizacaoDocumento =
+      obSpf.DataContabilizacaoDocumento;
+
+    await this.repository.save(ordemBancaria);
   }
 
   somarValorDocumento(obSpf: OrdemBancariaSpfDto): number {
