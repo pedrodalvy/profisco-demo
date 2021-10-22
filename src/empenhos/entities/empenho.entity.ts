@@ -1,4 +1,8 @@
-import { FilterableField, IDField } from '@nestjs-query/query-graphql';
+import {
+  FilterableField,
+  FilterableOffsetConnection,
+  IDField,
+} from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import {
   Column,
@@ -14,6 +18,7 @@ import { OrdemBancaria } from '../../ordens-bancarias/entities/ordem-bancaria.en
 
 @ObjectType()
 @Entity('empenhos')
+@FilterableOffsetConnection('ordensBancarias', () => OrdemBancaria)
 export class Empenho {
   @IDField(() => ID)
   @PrimaryGeneratedColumn()
@@ -35,7 +40,7 @@ export class Empenho {
   @Column({ length: 50, unique: true })
   numero: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ name: 'numero_original', length: 50 })
   numeroOriginal: string;
 

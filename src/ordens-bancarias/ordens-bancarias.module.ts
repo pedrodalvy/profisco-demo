@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
-import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
+import {
+  NestjsQueryGraphQLModule,
+  PagingStrategies,
+} from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { OrdemBancaria } from './entities/ordem-bancaria.entity';
 import { SincronizadorObSpfService } from './services/sincronizador-ob-spf.service';
@@ -20,6 +23,8 @@ import { OrdemBancariaRepository } from './repositories/ordem-bancaria.repositor
         {
           EntityClass: OrdemBancaria,
           DTOClass: OrdemBancaria,
+          pagingStrategy: PagingStrategies.OFFSET,
+          enableTotalCount: true,
           create: { disabled: true },
           read: { many: { name: 'ordensBancarias' } },
           update: { disabled: true },
