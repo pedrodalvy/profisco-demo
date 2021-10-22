@@ -15,5 +15,6 @@ import { BuscarObsSpfService } from './services/buscar-obs-spf.service';
     BuscarEmpenhosSpfService,
     BuscarObsSpfService,
   ],
+  exports: [AuthSpfService, BuscarEmpenhosSpfService, BuscarObsSpfService],
 })
 export class SpfModule {}

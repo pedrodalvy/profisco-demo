@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrdensBancariasModule } from './ordens-bancarias/ordens-bancarias.module';
 import { SpfModule } from './spf/spf.module';
 import * as ormConfig from './config/orm.config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import * as ormConfig from './config/orm.config';
       playground: true,
       installSubscriptionHandlers: true,
     }),
+    EventEmitterModule.forRoot(),
     EmpenhosModule,
     OrdensBancariasModule,
     SpfModule,

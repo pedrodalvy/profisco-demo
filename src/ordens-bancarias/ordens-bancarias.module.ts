@@ -2,9 +2,14 @@ import { Module } from '@nestjs/common';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { OrdemBancaria } from './entities/ordem-bancaria.entity';
+import { SincronizadorObSpfService } from './services/sincronizador-ob-spf.service';
+import { BuscarObsSpfService } from '../spf/services/buscar-obs-spf.service';
+import { AuthSpfService } from '../spf/services/auth-spf.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    HttpModule,
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([OrdemBancaria])],
       resolvers: [
@@ -19,5 +24,6 @@ import { OrdemBancaria } from './entities/ordem-bancaria.entity';
       ],
     }),
   ],
+  providers: [SincronizadorObSpfService, BuscarObsSpfService, AuthSpfService],
 })
 export class OrdensBancariasModule {}

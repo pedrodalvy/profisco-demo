@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AuthSpfService } from './auth-spf.service';
 import { spfConfig } from '../../config/spf.config';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 import { BuscarObSpfInput } from '../dto/buscar-ob-spf.input';
 import { OrdemBancariaSpfDto } from '../dto/ordem-bancaria-spf.dto';
 
@@ -17,16 +17,17 @@ export class BuscarObsSpfService {
     inputData: BuscarObSpfInput,
   ): Promise<OrdemBancariaSpfDto[]> {
     const uri = spfConfig.recursos.ordensBancariasURI;
+    const { baseURL } = spfConfig;
     const token = await this.authSpfService.getToken();
 
-    const response = await lastValueFrom(
-      this.httpService.get(uri, {
-        baseURL: spfConfig.baseURL,
-        params: { ...inputData, token },
-      }),
+    const response = lastValueFrom(
+      this.httpService
+        .get(uri, { baseURL, params: { ...inputData, token } })
+        .pipe(map((res) => res.data)),
     );
 
-    const responseData = await response.data;
-    return <OrdemBancariaSpfDto[]>responseData.data;
+    return response
+      .then((res) => <OrdemBancariaSpfDto[]>res.data)
+      .catch(() => [new OrdemBancariaSpfDto()]);
   }
 }
