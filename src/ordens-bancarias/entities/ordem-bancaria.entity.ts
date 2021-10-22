@@ -46,15 +46,15 @@ export class OrdemBancaria {
 
   @FilterableField()
   @Column({ name: 'numero_contrato' })
-  numeroContrato: string;
+  numeroContrato: number;
 
   @FilterableField()
   @Column({ name: 'numero_convenio' })
-  numeroConvenio: string;
+  numeroConvenio: number;
 
   @FilterableField()
   @Column({ name: 'aditivo_convenio' })
-  aditivoConvenio: string;
+  aditivoConvenio: number;
 
   @FilterableField()
   @Column({ name: 'iduso_fonte_recurso' })
@@ -86,7 +86,7 @@ export class OrdemBancaria {
 
   @FilterableField()
   @Column({ name: 'identificador_uso_codigo' })
-  identificador_uso_codigo: number;
+  identificadorUsoCodigo: number;
 
   @FilterableField()
   @Column({ name: 'valor_documento' })

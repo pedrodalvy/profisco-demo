@@ -7,10 +7,13 @@ import { BuscarObsSpfService } from '../spf/services/buscar-obs-spf.service';
 import { AuthSpfService } from '../spf/services/auth-spf.service';
 import { HttpModule } from '@nestjs/axios';
 import { EmpenhoCreatedListener } from './listeners/empenho-created.listener';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OrdemBancariaRepository } from './repositories/ordem-bancaria.repository';
 
 @Module({
   imports: [
     HttpModule,
+    TypeOrmModule.forFeature([OrdemBancariaRepository]),
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([OrdemBancaria])],
       resolvers: [

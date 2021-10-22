@@ -9,9 +9,9 @@ type OrdemBancaria {
   credorIdentificacao: String!
   finalidadePagamento: String!
   justificativaEstorno: String!
-  numeroContrato: String!
-  numeroConvenio: String!
-  aditivoConvenio: String!
+  numeroContrato: Float!
+  numeroConvenio: Float!
+  aditivoConvenio: Float!
   idusoFonteRecurso: String!
   situacaoOb: String!
   notaFiscal: String!
@@ -19,7 +19,7 @@ type OrdemBancaria {
   codigoUg: Float!
   ugFavorecida: Float!
   versaoContrato: Float!
-  identificador_uso_codigo: Float!
+  identificadorUsoCodigo: Float!
   valorDocumento: Float!
   dataEmissaoDocumento: DateTime!
   dataContabilizacaoDocumento: DateTime!
@@ -161,9 +161,9 @@ type OrdemBancariaSpfDto {
   NumeroDocumento: String
   NumeroDocumentoOriginal: String
   CredorIdentificacaoFavorecida: String
-  UGFavorecida: String
-  DataEmissaoDocumento: String
-  DataContabilizacaoDocumento: String
+  UGFavorecida: Float
+  DataEmissaoDocumento: DateTime
+  DataContabilizacaoDocumento: DateTime
   FinalidadePagamento: String
   JustificativaEstorno: String
   NumeroContrato: Float
@@ -200,9 +200,9 @@ type OrdemBancariaAggregateGroupBy {
   credorIdentificacao: String
   finalidadePagamento: String
   justificativaEstorno: String
-  numeroContrato: String
-  numeroConvenio: String
-  aditivoConvenio: String
+  numeroContrato: Float
+  numeroConvenio: Float
+  aditivoConvenio: Float
   idusoFonteRecurso: String
   situacaoOb: String
   notaFiscal: String
@@ -210,7 +210,7 @@ type OrdemBancariaAggregateGroupBy {
   codigoUg: Float
   ugFavorecida: Float
   versaoContrato: Float
-  identificador_uso_codigo: Float
+  identificadorUsoCodigo: Float
   valorDocumento: Float
   dataEmissaoDocumento: DateTime
   dataContabilizacaoDocumento: DateTime
@@ -234,7 +234,7 @@ type OrdemBancariaCountAggregate {
   codigoUg: Int
   ugFavorecida: Int
   versaoContrato: Int
-  identificador_uso_codigo: Int
+  identificadorUsoCodigo: Int
   valorDocumento: Int
   dataEmissaoDocumento: Int
   dataContabilizacaoDocumento: Int
@@ -243,20 +243,26 @@ type OrdemBancariaCountAggregate {
 
 type OrdemBancariaSumAggregate {
   id: Float
+  numeroContrato: Float
+  numeroConvenio: Float
+  aditivoConvenio: Float
   codigoUg: Float
   ugFavorecida: Float
   versaoContrato: Float
-  identificador_uso_codigo: Float
+  identificadorUsoCodigo: Float
   valorDocumento: Float
   empenhoId: Float
 }
 
 type OrdemBancariaAvgAggregate {
   id: Float
+  numeroContrato: Float
+  numeroConvenio: Float
+  aditivoConvenio: Float
   codigoUg: Float
   ugFavorecida: Float
   versaoContrato: Float
-  identificador_uso_codigo: Float
+  identificadorUsoCodigo: Float
   valorDocumento: Float
   empenhoId: Float
 }
@@ -268,9 +274,9 @@ type OrdemBancariaMinAggregate {
   credorIdentificacao: String
   finalidadePagamento: String
   justificativaEstorno: String
-  numeroContrato: String
-  numeroConvenio: String
-  aditivoConvenio: String
+  numeroContrato: Float
+  numeroConvenio: Float
+  aditivoConvenio: Float
   idusoFonteRecurso: String
   situacaoOb: String
   notaFiscal: String
@@ -278,7 +284,7 @@ type OrdemBancariaMinAggregate {
   codigoUg: Float
   ugFavorecida: Float
   versaoContrato: Float
-  identificador_uso_codigo: Float
+  identificadorUsoCodigo: Float
   valorDocumento: Float
   dataEmissaoDocumento: DateTime
   dataContabilizacaoDocumento: DateTime
@@ -292,9 +298,9 @@ type OrdemBancariaMaxAggregate {
   credorIdentificacao: String
   finalidadePagamento: String
   justificativaEstorno: String
-  numeroContrato: String
-  numeroConvenio: String
-  aditivoConvenio: String
+  numeroContrato: Float
+  numeroConvenio: Float
+  aditivoConvenio: Float
   idusoFonteRecurso: String
   situacaoOb: String
   notaFiscal: String
@@ -302,7 +308,7 @@ type OrdemBancariaMaxAggregate {
   codigoUg: Float
   ugFavorecida: Float
   versaoContrato: Float
-  identificador_uso_codigo: Float
+  identificadorUsoCodigo: Float
   valorDocumento: Float
   dataEmissaoDocumento: DateTime
   dataContabilizacaoDocumento: DateTime
@@ -469,9 +475,9 @@ input OrdemBancariaFilter {
   credorIdentificacao: StringFieldComparison
   finalidadePagamento: StringFieldComparison
   justificativaEstorno: StringFieldComparison
-  numeroContrato: StringFieldComparison
-  numeroConvenio: StringFieldComparison
-  aditivoConvenio: StringFieldComparison
+  numeroContrato: NumberFieldComparison
+  numeroConvenio: NumberFieldComparison
+  aditivoConvenio: NumberFieldComparison
   idusoFonteRecurso: StringFieldComparison
   situacaoOb: StringFieldComparison
   notaFiscal: StringFieldComparison
@@ -479,7 +485,7 @@ input OrdemBancariaFilter {
   codigoUg: NumberFieldComparison
   ugFavorecida: NumberFieldComparison
   versaoContrato: NumberFieldComparison
-  identificador_uso_codigo: NumberFieldComparison
+  identificadorUsoCodigo: NumberFieldComparison
   valorDocumento: NumberFieldComparison
   dataEmissaoDocumento: DateFieldComparison
   dataContabilizacaoDocumento: DateFieldComparison
@@ -546,7 +552,7 @@ enum OrdemBancariaSortFields {
   codigoUg
   ugFavorecida
   versaoContrato
-  identificador_uso_codigo
+  identificadorUsoCodigo
   valorDocumento
   dataEmissaoDocumento
   dataContabilizacaoDocumento

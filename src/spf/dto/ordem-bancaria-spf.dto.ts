@@ -63,13 +63,13 @@ export class OrdemBancariaSpfDto {
   CredorIdentificacaoFavorecida: string;
 
   @Field({ nullable: true })
-  UGFavorecida: string;
+  UGFavorecida: number;
 
   @Field({ nullable: true })
-  DataEmissaoDocumento: string;
+  DataEmissaoDocumento: Date;
 
   @Field({ nullable: true })
-  DataContabilizacaoDocumento: string;
+  DataContabilizacaoDocumento: Date;
 
   @Field({ nullable: true })
   FinalidadePagamento: string;
