@@ -6,6 +6,7 @@ import { SincronizadorObSpfService } from './services/sincronizador-ob-spf.servi
 import { BuscarObsSpfService } from '../spf/services/buscar-obs-spf.service';
 import { AuthSpfService } from '../spf/services/auth-spf.service';
 import { HttpModule } from '@nestjs/axios';
+import { EmpenhoCreatedListener } from './listeners/empenho-created.listener';
 
 @Module({
   imports: [
@@ -24,6 +25,11 @@ import { HttpModule } from '@nestjs/axios';
       ],
     }),
   ],
-  providers: [SincronizadorObSpfService, BuscarObsSpfService, AuthSpfService],
+  providers: [
+    EmpenhoCreatedListener,
+    SincronizadorObSpfService,
+    BuscarObsSpfService,
+    AuthSpfService,
+  ],
 })
 export class OrdensBancariasModule {}

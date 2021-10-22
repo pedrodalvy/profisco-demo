@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { EmpenhoCreatedEvent } from '../events/empenho-created.event';
+import { EmpenhoCreatedEvent } from '../../empenhos/events/empenho-created.event';
 import { OnEvent } from '@nestjs/event-emitter';
-import { SincronizadorObSpfService } from '../../ordens-bancarias/services/sincronizador-ob-spf.service';
-import { Empenho } from '../entities/empenho.entity';
+import { SincronizadorObSpfService } from '../services/sincronizador-ob-spf.service';
+import { Empenho } from '../../empenhos/entities/empenho.entity';
 
 @Injectable()
 export class EmpenhoCreatedListener {

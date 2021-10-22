@@ -54,47 +54,6 @@ type Empenho {
   ordensBancarias: [OrdemBancaria!]
 }
 
-type ListaCredoresOrdemBancaria {
-  CredorOBLista: String
-  Valor: Float
-  SituacaoPagamentoCredor: String
-  NomeCompletoBeneficiario: String
-  NumeroPedido: String
-  TipoPedidoRelatorio: String
-}
-
-type ItensOrdemBancaria {
-  NumeroLiquidacao: String
-  NumeroRetencao: String
-  NumeroEmpenho: String
-  NumeroEmpenhoOriginal: String
-  FuncionalProgramatica: String
-  NaturezaDespesa: String
-  ValorItem: Float
-  ListaCredoresOrdemBancaria: [ListaCredoresOrdemBancaria!]
-}
-
-type OrdemBancariaSpfDto {
-  CodigoUG: Float
-  NumeroDocumento: String
-  NumeroDocumentoOriginal: String
-  CredorIdentificacaoFavorecida: String
-  UGFavorecida: String
-  DataEmissaoDocumento: String
-  DataContabilizacaoDocumento: String
-  FinalidadePagamento: String
-  JustificativaEstorno: String
-  NumeroContrato: Float
-  VersaoContrato: Float
-  NumeroConvenio: Float
-  AditivoConvenio: Float
-  IdentificadorUsoCodigo: Float
-  IdusoFonteRecurso: String
-  ValorDocumento: Float
-  SituacaoOB: String
-  ItensOrdemBancaria: [ItensOrdemBancaria!]
-}
-
 type EmpenhoDeleteResponse {
   id: ID
   unidadeGestora: Float
@@ -175,6 +134,47 @@ type EmpenhoMinAggregate {
 type EmpenhoMaxAggregate {
   id: ID
   unidadeGestora: Float
+}
+
+type ListaCredoresOrdemBancaria {
+  CredorOBLista: String
+  Valor: Float
+  SituacaoPagamentoCredor: String
+  NomeCompletoBeneficiario: String
+  NumeroPedido: String
+  TipoPedidoRelatorio: String
+}
+
+type ItensOrdemBancaria {
+  NumeroLiquidacao: String
+  NumeroRetencao: String
+  NumeroEmpenho: String
+  NumeroEmpenhoOriginal: String
+  FuncionalProgramatica: String
+  NaturezaDespesa: String
+  ValorItem: Float
+  ListaCredoresOrdemBancaria: [ListaCredoresOrdemBancaria!]
+}
+
+type OrdemBancariaSpfDto {
+  CodigoUG: Float
+  NumeroDocumento: String
+  NumeroDocumentoOriginal: String
+  CredorIdentificacaoFavorecida: String
+  UGFavorecida: String
+  DataEmissaoDocumento: String
+  DataContabilizacaoDocumento: String
+  FinalidadePagamento: String
+  JustificativaEstorno: String
+  NumeroContrato: Float
+  VersaoContrato: Float
+  NumeroConvenio: Float
+  AditivoConvenio: Float
+  IdentificadorUsoCodigo: Float
+  IdusoFonteRecurso: String
+  ValorDocumento: Float
+  SituacaoOB: String
+  ItensOrdemBancaria: [ItensOrdemBancaria!]
 }
 
 type OrdemBancariaEdge {
